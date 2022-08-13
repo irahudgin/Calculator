@@ -25,3 +25,13 @@ function operate(operator, x, y) {
     return multiply(x, y);
   }
 }
+
+function numberInput(e) {
+  console.log(e);
+  console.log(this);
+}
+
+const numButtons = document.querySelectorAll(".numberButton");
+numButtons.forEach((button) => {
+  button.addEventListener("click", numberInput);
+});

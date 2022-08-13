@@ -19,6 +19,9 @@
   height: 30px;
   flex-shrink: 0;
   border: 2px solid black;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .buttoncontainer {
@@ -28,7 +31,6 @@
 
 .row {
   display: flex;
-  justify-content: space-around;
 }
 
 .numberButton {
