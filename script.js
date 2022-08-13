@@ -29,9 +29,19 @@ function operate(operator, x, y) {
 function numberInput(e) {
   console.log(e);
   console.log(this);
+  let display = document.querySelector("#calculatorScreenText");
+  display.textContent += this.id;
+}
+
+function clearScreen(e) {
+  let display = document.querySelector("#calculatorScreenText");
+  display.textContent = "";
 }
 
 const numButtons = document.querySelectorAll(".numberButton");
 numButtons.forEach((button) => {
   button.addEventListener("click", numberInput);
 });
+
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", clearScreen);
