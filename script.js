@@ -1,17 +1,21 @@
 function add(x) {
-  return x;
+  let finalNum = x[0] + x[1];
+  return finalNum.toString();
 }
 
 function subtract(x) {
-  return x;
+  let finalNum = x[0] - x[1];
+  return finalNum.toString();
 }
 
 function multiply(x) {
-  return x;
+  let finalNum = x[0] * x[1];
+  return finalNum.toString();
 }
 
 function divide(x) {
-  return x;
+  let finalNum = x[0] / x[1];
+  return finalNum.toString();
 }
 
 function operate(operator, x) {
@@ -35,6 +39,7 @@ function clearScreen(e) {
 }
 
 const screenDisplay = document.querySelector("#calculatorScreenText");
+const equalsButton = document.querySelector("#equals");
 
 const numButtons = document.querySelectorAll(".numberButton");
 numButtons.forEach((button) => {
@@ -47,7 +52,12 @@ clearButton.addEventListener("click", clearScreen);
 const operatorButtons = document.querySelectorAll(".operatorButton");
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    let operator = e.target.id;
-    let firstNumber = parseInt(screenDisplay.textContent);
+    const operator = e.target.id;
+    const numbersToOperate = [parseInt(screenDisplay.textContent)]; // add preliminary screen display number to array as first number
+    clearScreen();
+    equalsButton.addEventListener("click", () => {
+      numbersToOperate.push(parseInt(screenDisplay.textContent)); // adds secondary number to array when equals is pressed
+      screenDisplay.textContent = operate(operator, numbersToOperate);
+    });
   });
 });
