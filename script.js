@@ -19,6 +19,7 @@ function divide(x) {
 }
 
 function operate(operator, x) {
+  console.log(`this is x: ${x}`);
   if (operator === "add") {
     return add(x);
   } else if (operator === "subtract") {
@@ -49,17 +50,17 @@ numButtons.forEach((button) => {
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", clear);
 
+var operator = "";
+var numbersToOperate = [];
 const operatorButtons = document.querySelectorAll(".operatorButton");
 operatorButtons.forEach((operatorButton) => {
   operatorButton.addEventListener("click", (e) => {
-    var numbersToOperate = [];
-    var operator = e.target.id;
+    operator = e.target.id;
     numbersToOperate[0] = parseInt(screenDisplay.textContent); // add preliminary screen display number to array as first number
     clear();
-    equalsButton.addEventListener("click", () => {
-      numbersToOperate.push(parseInt(screenDisplay.textContent)); // adds secondary number to array when equals is pressed
-      screenDisplay.textContent = operate(operator, numbersToOperate);
-      numbersToOperate.length = 0;
-    });
   });
+});
+equalsButton.addEventListener("click", () => {
+  numbersToOperate[1] = parseInt(screenDisplay.textContent);
+  screenDisplay.textContent = operate(operator, numbersToOperate);
 });
