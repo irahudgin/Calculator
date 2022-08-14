@@ -19,7 +19,6 @@ function divide(x) {
 }
 
 function operate(operator, x) {
-  console.log(`this is x: ${x}`);
   if (operator === "add") {
     return add(x);
   } else if (operator === "subtract") {
@@ -39,15 +38,22 @@ function clear() {
   screenDisplay.textContent = "";
 }
 
+function equalsClear(e) {
+  if (e.target.className === "numberButton") {
+    clear();
+    window.removeEventListener("mousedown", equalsClear);
+  }
+}
+
 const screenDisplay = document.querySelector("#calculatorScreenText");
 const equalsButton = document.querySelector("#equals");
+const clearButton = document.querySelector("#clear");
 
 const numButtons = document.querySelectorAll(".numberButton");
 numButtons.forEach((button) => {
   button.addEventListener("click", numberInput);
 });
 
-const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", clear);
 
 var operator = "";
@@ -63,4 +69,5 @@ operatorButtons.forEach((operatorButton) => {
 equalsButton.addEventListener("click", () => {
   numbersToOperate[1] = parseInt(screenDisplay.textContent);
   screenDisplay.textContent = operate(operator, numbersToOperate);
+  window.addEventListener("mousedown", equalsClear);
 });
