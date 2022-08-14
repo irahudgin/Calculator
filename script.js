@@ -34,7 +34,7 @@ function numberInput(e) {
   screenDisplay.textContent += this.id;
 }
 
-function clearScreen(e) {
+function clear() {
   screenDisplay.textContent = "";
 }
 
@@ -47,17 +47,19 @@ numButtons.forEach((button) => {
 });
 
 const clearButton = document.querySelector("#clear");
-clearButton.addEventListener("click", clearScreen);
+clearButton.addEventListener("click", clear);
 
 const operatorButtons = document.querySelectorAll(".operatorButton");
-operatorButtons.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const operator = e.target.id;
-    const numbersToOperate = [parseInt(screenDisplay.textContent)]; // add preliminary screen display number to array as first number
-    clearScreen();
+operatorButtons.forEach((operatorButton) => {
+  operatorButton.addEventListener("click", (e) => {
+    var numbersToOperate = [];
+    var operator = e.target.id;
+    numbersToOperate[0] = parseInt(screenDisplay.textContent); // add preliminary screen display number to array as first number
+    clear();
     equalsButton.addEventListener("click", () => {
       numbersToOperate.push(parseInt(screenDisplay.textContent)); // adds secondary number to array when equals is pressed
       screenDisplay.textContent = operate(operator, numbersToOperate);
+      numbersToOperate.length = 0;
     });
   });
 });
