@@ -1,42 +1,40 @@
-function add(x, y) {
-  return x + y;
+function add(x) {
+  return x;
 }
 
-function subtract(x, y) {
-  return x - y;
+function subtract(x) {
+  return x;
 }
 
-function multiply(x, y) {
-  return x * y;
+function multiply(x) {
+  return x;
 }
 
-function divide(x, y) {
-  return x / y;
+function divide(x) {
+  return x;
 }
 
-function operate(operator, x, y) {
+function operate(operator, x) {
   if (operator === "add") {
-    return add(x, y);
+    return add(x);
   } else if (operator === "subtract") {
-    return subtract(x, y);
+    return subtract(x);
   } else if (operator === "divide") {
-    return divide(x, y);
+    return divide(x);
   } else if (operator === "multiply") {
-    return multiply(x, y);
+    return multiply(x);
   }
 }
 
 function numberInput(e) {
-  console.log(e);
-  console.log(this);
-  let display = document.querySelector("#calculatorScreenText");
-  display.textContent += this.id;
+  screenDisplay.textContent += this.id;
 }
 
 function clearScreen(e) {
-  let display = document.querySelector("#calculatorScreenText");
-  display.textContent = "";
+  screenDisplay.textContent = "";
 }
+
+const screenDisplay = document.querySelector("#calculatorScreenText");
 
 const numButtons = document.querySelectorAll(".numberButton");
 numButtons.forEach((button) => {
@@ -45,3 +43,11 @@ numButtons.forEach((button) => {
 
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", clearScreen);
+
+const operatorButtons = document.querySelectorAll(".operatorButton");
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    let operator = e.target.id;
+    let firstNumber = parseInt(screenDisplay.textContent);
+  });
+});
