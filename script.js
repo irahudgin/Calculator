@@ -61,9 +61,17 @@ var numbersToOperate = [];
 const operatorButtons = document.querySelectorAll(".operatorButton");
 operatorButtons.forEach((operatorButton) => {
   operatorButton.addEventListener("click", (e) => {
-    operator = e.target.id;
-    numbersToOperate[0] = parseInt(screenDisplay.textContent); // add preliminary screen display number to array as first number
-    clear();
+    if (Boolean(numbersToOperate[0])) {
+      operator = e.target.id;
+      numbersToOperate[1] = parseInt(screenDisplay.textContent);
+      screenDisplay.textContent = operate(operator, numbersToOperate);
+      numbersToOperate[0] = parseInt(screenDisplay.textContent);
+    } else {
+      console.log(`numbersToOperate: ${numbersToOperate}`);
+      operator = e.target.id;
+      numbersToOperate[0] = parseInt(screenDisplay.textContent); // add preliminary screen display number to array as first number
+      clear();
+    }
   });
 });
 equalsButton.addEventListener("click", () => {
