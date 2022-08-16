@@ -62,17 +62,19 @@ const operatorButtons = document.querySelectorAll(".operatorButton");
 operatorButtons.forEach((operatorButton) => {
   operatorButton.addEventListener("click", (e) => {
     if (Boolean(numbersToOperate[0])) {
+      console.log(operator);
       console.log(numbersToOperate);
-      operator = e.target.id;
       numbersToOperate[1] = parseInt(screenDisplay.textContent);
       screenDisplay.textContent = operate(operator, numbersToOperate);
       numbersToOperate[0] = parseInt(screenDisplay.textContent);
+      operator = e.target.id;
       numButtons.forEach((button) => {
         button.addEventListener("mousedown", equalsClear);
       });
     } else {
       console.log(numbersToOperate);
       operator = e.target.id;
+      console.log(operator);
       numbersToOperate[0] = parseInt(screenDisplay.textContent); // add preliminary screen display number to array as first number
       clear();
     }
