@@ -36,11 +36,17 @@ function numberInput(e) {
 
 function clear() {
   screenDisplay.textContent = "";
+  if (Boolean(numbersToOperate[0])) {
+    // If there is data in the array, clear it and the operator for a full clear
+    numbersToOperate.length = 0;
+    operator = "";
+  }
 }
 
 function equalsClear(e) {
   if (e.target.className === "numberButton") {
-    clear();
+    // If a new number button is pressed, clear screen and show new number
+    screenDisplay.textContent = "";
     window.removeEventListener("mousedown", equalsClear);
   }
 }
@@ -76,7 +82,7 @@ operatorButtons.forEach((operatorButton) => {
       operator = e.target.id;
       console.log(operator);
       numbersToOperate[0] = parseInt(screenDisplay.textContent); // add preliminary screen display number to array as first number
-      clear();
+      screenDisplay.textContent = "";
     }
   });
 });
