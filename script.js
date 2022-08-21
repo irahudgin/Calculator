@@ -74,9 +74,18 @@ backSpace.addEventListener("click", () => {
   );
 });
 
-window.addEventListener("keydown", (e) => {
-  console.log(e.key);
-});
+function keyLimits(e) {
+  if (e.key >= 0 && e.key <= 9) {
+    console.log(e.key);
+  } else if (e.key == "/" || e.key == "c" || e.key == "x" || e.key == "-") {
+    console.log(e.key);
+  }
+}
+
+// window.addEventListener("keydown", (e) => {
+//   console.log(e.key);
+// });
+window.addEventListener("keydown", (e) => keyLimits(e));
 
 var operator = "";
 var numbersToOperate = [];
