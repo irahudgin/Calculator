@@ -76,9 +76,31 @@ backSpace.addEventListener("click", () => {
 
 function keyLimits(e) {
   if (e.key >= 0 && e.key <= 9) {
-    console.log(e.key);
-  } else if (e.key == "/" || e.key == "c" || e.key == "x" || e.key == "-") {
-    console.log(e.key);
+    screenDisplay.textContent += e.key;
+  } else if (e.key == "/" || e.key == "c" || e.key == "x") {
+    operatorButtonClick(e);
+  } else {
+    return;
+  }
+}
+
+function operatorButtonClick(e) {
+  if (Boolean(numbersToOperate[0])) {
+    console.log(operator);
+    console.log(numbersToOperate);
+    numbersToOperate[1] = parseFloat(screenDisplay.textContent);
+    screenDisplay.textContent = operate(operator, numbersToOperate);
+    numbersToOperate[0] = parseFloat(screenDisplay.textContent);
+    operator = e.target.id;
+    numButtons.forEach((button) => {
+      button.addEventListener("mousedown", equalsClear);
+    });
+  } else {
+    console.log(numbersToOperate);
+    operator = e.target.id;
+    console.log(e);
+    numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
+    screenDisplay.textContent = "";
   }
 }
 
@@ -91,25 +113,7 @@ var operator = "";
 var numbersToOperate = [];
 const operatorButtons = document.querySelectorAll(".operatorButton");
 operatorButtons.forEach((operatorButton) => {
-  operatorButton.addEventListener("click", (e) => {
-    if (Boolean(numbersToOperate[0])) {
-      console.log(operator);
-      console.log(numbersToOperate);
-      numbersToOperate[1] = parseFloat(screenDisplay.textContent);
-      screenDisplay.textContent = operate(operator, numbersToOperate);
-      numbersToOperate[0] = parseFloat(screenDisplay.textContent);
-      operator = e.target.id;
-      numButtons.forEach((button) => {
-        button.addEventListener("mousedown", equalsClear);
-      });
-    } else {
-      console.log(numbersToOperate);
-      operator = e.target.id;
-      console.log(operator);
-      numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
-      screenDisplay.textContent = "";
-    }
-  });
+  operatorButton.addEventListener("click", operatorButtonClick);
 });
 
 equalsButton.addEventListener("click", () => {
