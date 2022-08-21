@@ -57,6 +57,7 @@ function equalsClear(e) {
 const screenDisplay = document.querySelector("#calculatorScreenText");
 const equalsButton = document.querySelector("#equals");
 const clearButton = document.querySelector("#clear");
+const backSpace = document.querySelector("#backspace");
 
 const numButtons = document.querySelectorAll(".numberButton");
 numButtons.forEach((button) => {
@@ -64,6 +65,18 @@ numButtons.forEach((button) => {
 });
 
 clearButton.addEventListener("click", clear);
+
+backSpace.addEventListener("click", () => {
+  let screenDisplayBS = screenDisplay.textContent;
+  screenDisplay.textContent = screenDisplayBS.slice(
+    0,
+    screenDisplayBS.length - 1
+  );
+});
+
+window.addEventListener("keydown", (e) => {
+  console.log(e.key);
+});
 
 var operator = "";
 var numbersToOperate = [];
@@ -73,9 +86,9 @@ operatorButtons.forEach((operatorButton) => {
     if (Boolean(numbersToOperate[0])) {
       console.log(operator);
       console.log(numbersToOperate);
-      numbersToOperate[1] = parseInt(screenDisplay.textContent);
+      numbersToOperate[1] = parseFloat(screenDisplay.textContent);
       screenDisplay.textContent = operate(operator, numbersToOperate);
-      numbersToOperate[0] = parseInt(screenDisplay.textContent);
+      numbersToOperate[0] = parseFloat(screenDisplay.textContent);
       operator = e.target.id;
       numButtons.forEach((button) => {
         button.addEventListener("mousedown", equalsClear);
@@ -84,13 +97,14 @@ operatorButtons.forEach((operatorButton) => {
       console.log(numbersToOperate);
       operator = e.target.id;
       console.log(operator);
-      numbersToOperate[0] = parseInt(screenDisplay.textContent); // add preliminary screen display number to array as first number
+      numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
       screenDisplay.textContent = "";
     }
   });
 });
+
 equalsButton.addEventListener("click", () => {
-  numbersToOperate[1] = parseInt(screenDisplay.textContent);
+  numbersToOperate[1] = parseFloat(screenDisplay.textContent);
   screenDisplay.textContent = operate(operator, numbersToOperate);
   numbersToOperate.length = 0;
   window.addEventListener("mousedown", equalsClear);
