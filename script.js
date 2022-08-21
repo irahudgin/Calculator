@@ -14,6 +14,9 @@ function multiply(x) {
 }
 
 function divide(x) {
+  if ((x[0] && x[1]) === 0) {
+    return "Dont do that";
+  }
   let finalNum = x[0] / x[1];
   return finalNum.toString();
 }
@@ -37,7 +40,7 @@ function numberInput(e) {
 function clear() {
   screenDisplay.textContent = "";
   if (Boolean(numbersToOperate[0])) {
-    // If there is data in the array, clear it and the operator for a full clear
+    // If there is data in the array, clear it, and the operator for a full clear
     numbersToOperate.length = 0;
     operator = "";
   }
