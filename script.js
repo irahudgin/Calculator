@@ -54,6 +54,47 @@ function equalsClear(e) {
   }
 }
 
+function keyLimits(e) {
+  if (e.key >= 0 && e.key <= 9) {
+    screenDisplay.textContent += e.key;
+  } else if (e.key == "/") {
+    document.getElementById("divide").click();
+  } else if (e.key == "x") {
+    document.getElementById("multiply").click();
+  } else if (e.key == "+") {
+    document.getElementById("add").click();
+  } else if (e.key == "-") {
+    document.getElementById("subtract").click();
+  } else if (e.key == "c") {
+    document.getElementById("clear").click();
+  } else if (e.key == "Backspace") {
+    document.getElementById("backspace").click();
+  } else {
+    return;
+  }
+}
+
+function operatorButtonClick(e) {
+  if (Boolean(numbersToOperate[0])) {
+    console.log(operator);
+    console.log(numbersToOperate);
+    numbersToOperate[1] = parseFloat(screenDisplay.textContent);
+    screenDisplay.textContent = operate(operator, numbersToOperate);
+    numbersToOperate[0] = parseFloat(screenDisplay.textContent);
+    operator = e.target.id;
+    console.log(e);
+    numButtons.forEach((button) => {
+      button.addEventListener("mousedown", equalsClear);
+    });
+  } else {
+    console.log(numbersToOperate);
+    operator = e.target.id;
+    console.log();
+    numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
+    screenDisplay.textContent = "";
+  }
+}
+
 const screenDisplay = document.querySelector("#calculatorScreenText");
 const equalsButton = document.querySelector("#equals");
 const clearButton = document.querySelector("#clear");
@@ -74,40 +115,11 @@ backSpace.addEventListener("click", () => {
   );
 });
 
-function keyLimits(e) {
-  if (e.key >= 0 && e.key <= 9) {
-    screenDisplay.textContent += e.key;
-  } else if (e.key == "/" || e.key == "c" || e.key == "x") {
-    operatorButtonClick(e);
-  } else {
-    return;
-  }
-}
-
-function operatorButtonClick(e) {
-  if (Boolean(numbersToOperate[0])) {
-    console.log(operator);
-    console.log(numbersToOperate);
-    numbersToOperate[1] = parseFloat(screenDisplay.textContent);
-    screenDisplay.textContent = operate(operator, numbersToOperate);
-    numbersToOperate[0] = parseFloat(screenDisplay.textContent);
-    operator = e.target.id;
-    numButtons.forEach((button) => {
-      button.addEventListener("mousedown", equalsClear);
-    });
-  } else {
-    console.log(numbersToOperate);
-    operator = e.target.id;
-    console.log(e);
-    numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
-    screenDisplay.textContent = "";
-  }
-}
-
 // window.addEventListener("keydown", (e) => {
 //   console.log(e.key);
 // });
 window.addEventListener("keydown", (e) => keyLimits(e));
+window.addEventListener("keydown", (e) => console.log(e.key));
 
 var operator = "";
 var numbersToOperate = [];
