@@ -59,7 +59,7 @@ function keyLimits(e) {
     screenDisplay.textContent += e.key;
   } else if (e.key == "/") {
     document.getElementById("divide").click();
-  } else if (e.key == "x") {
+  } else if (e.key == "*") {
     document.getElementById("multiply").click();
   } else if (e.key == "+") {
     document.getElementById("add").click();
@@ -69,6 +69,8 @@ function keyLimits(e) {
     document.getElementById("clear").click();
   } else if (e.key == "Backspace") {
     document.getElementById("backspace").click();
+  } else if (e.key == "=") {
+    document.getElementById("equals").click();
   } else {
     return;
   }
@@ -115,11 +117,7 @@ backSpace.addEventListener("click", () => {
   );
 });
 
-// window.addEventListener("keydown", (e) => {
-//   console.log(e.key);
-// });
 window.addEventListener("keydown", (e) => keyLimits(e));
-window.addEventListener("keydown", (e) => console.log(e.key));
 
 var operator = "";
 var numbersToOperate = [];
