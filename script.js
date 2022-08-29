@@ -90,10 +90,9 @@ function operatorButtonClick(e) {
     numbersToOperate[0] = parseFloat(screenDisplay.textContent);
     operator = e.target.id;
     operatorClearToggle = 1;
+    // add a way for the number buttons to clear the screen like last time with the forEach loop
   } else {
-    console.log(numbersToOperate);
     operator = e.target.id;
-    console.log();
     numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
     screenDisplay.textContent = "";
   }
