@@ -85,8 +85,6 @@ function keyLimits(e) {
 
 function operatorButtonClick(e) {
   if (Boolean(numbersToOperate[0])) {
-    console.log(operator);
-    console.log(numbersToOperate);
     numbersToOperate[1] = parseFloat(screenDisplay.textContent);
     screenDisplay.textContent = operate(operator, numbersToOperate);
     numbersToOperate[0] = parseFloat(screenDisplay.textContent);
