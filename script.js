@@ -34,6 +34,10 @@ function operate(operator, x) {
 }
 
 function numberInput(e) {
+  if (operatorClearToggle == true) {
+    screenDisplay.textContent = "";
+    operatorClearToggle = false;
+  }
   screenDisplay.textContent += this.id;
 }
 
@@ -91,9 +95,6 @@ function operatorButtonClick(e) {
     operator = e.target.id;
     operatorClearToggle = true;
     // add a way for the number buttons to clear the screen like last time with the forEach loop
-    numButtons.forEach((button) => {
-      button.addEventListener("mousedown", screenClear);
-    });
   } else {
     operator = e.target.id;
     numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
