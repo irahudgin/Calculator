@@ -59,9 +59,9 @@ function screenClear(e) {
 
 function keyLimits(e) {
   if (e.key >= 0 && e.key <= 9) {
-    if (operatorClearToggle === 1) {
+    if (operatorClearToggle == true) {
       screenDisplay.textContent = "";
-      operatorClearToggle = 0;
+      operatorClearToggle = false;
     }
     document.getElementById(`${e.key}`).click();
   } else if (e.key == "/") {
@@ -89,8 +89,11 @@ function operatorButtonClick(e) {
     screenDisplay.textContent = operate(operator, numbersToOperate);
     numbersToOperate[0] = parseFloat(screenDisplay.textContent);
     operator = e.target.id;
-    operatorClearToggle = 1;
+    operatorClearToggle = true;
     // add a way for the number buttons to clear the screen like last time with the forEach loop
+    numButtons.forEach((button) => {
+      button.addEventListener("mousedown", screenClear);
+    });
   } else {
     operator = e.target.id;
     numbersToOperate[0] = parseFloat(screenDisplay.textContent); // add preliminary screen display number to array as first number
@@ -118,7 +121,7 @@ backSpace.addEventListener("click", () => {
   );
 });
 
-var operatorClearToggle = 0;
+var operatorClearToggle = false;
 var operator = "";
 var numbersToOperate = [];
 const operatorButtons = document.querySelectorAll(".operatorButton");
