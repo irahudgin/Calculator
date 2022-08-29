@@ -46,17 +46,24 @@ function clear() {
   }
 }
 
-function equalsClear(e) {
+function screenClear(e) {
+  console.log(e);
   if (e.target.className === "numberButton") {
     // If a new number button is pressed, clear screen and show new number
     screenDisplay.textContent = "";
-    window.removeEventListener("mousedown", equalsClear);
+    window.removeEventListener("mousedown", screenClear);
+  } else {
+    return;
   }
 }
 
 function keyLimits(e) {
   if (e.key >= 0 && e.key <= 9) {
-    screenDisplay.textContent += e.key;
+    if (operatorClearToggle === 1) {
+      screenDisplay.textContent = "";
+      operatorClearToggle = 0;
+    }
+    document.getElementById(`${e.key}`).click();
   } else if (e.key == "/") {
     document.getElementById("divide").click();
   } else if (e.key == "*") {
@@ -84,10 +91,7 @@ function operatorButtonClick(e) {
     screenDisplay.textContent = operate(operator, numbersToOperate);
     numbersToOperate[0] = parseFloat(screenDisplay.textContent);
     operator = e.target.id;
-    console.log(e);
-    numButtons.forEach((button) => {
-      button.addEventListener("mousedown", equalsClear);
-    });
+    operatorClearToggle = 1;
   } else {
     console.log(numbersToOperate);
     operator = e.target.id;
@@ -117,8 +121,7 @@ backSpace.addEventListener("click", () => {
   );
 });
 
-window.addEventListener("keydown", (e) => keyLimits(e));
-
+var operatorClearToggle = 0;
 var operator = "";
 var numbersToOperate = [];
 const operatorButtons = document.querySelectorAll(".operatorButton");
@@ -130,5 +133,7 @@ equalsButton.addEventListener("click", () => {
   numbersToOperate[1] = parseFloat(screenDisplay.textContent);
   screenDisplay.textContent = operate(operator, numbersToOperate);
   numbersToOperate.length = 0;
-  window.addEventListener("mousedown", equalsClear);
+  window.addEventListener("mousedown", screenClear);
 });
+
+window.addEventListener("keydown", (e) => keyLimits(e));
