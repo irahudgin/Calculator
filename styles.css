@@ -21,18 +21,27 @@ body {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  background-color: rgb(143, 242, 192);
+  background-color: rgb(235, 235, 235);
+  border-radius: 1px;
+  padding: 20px;
+  box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.625);
 }
 
 #calculatorscreen {
   width: auto;
   height: 30px;
   flex-shrink: 0;
-  border: 2px solid black;
+  border: 2px solid grey;
   display: flex;
   justify-content: end;
   align-items: center;
-  background-color: white;
+  background-color: rgb(78, 78, 78);
+  border-radius: 1px;
+}
+
+#calculatorScreenText {
+  color: aqua;
+  padding-right: 15px;
 }
 
 .buttoncontainer {
@@ -48,4 +57,16 @@ body {
   font-size: 13px;
   height: 100px;
   width: 100px;
+}
+
+.operatorButton {
+  width: auto;
+  height: auto;
+  flex-grow: 1;
+}
+
+.theRest {
+  width: auto;
+  height: auto;
+  flex-grow: 1;
 }
