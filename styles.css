@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "digital-7";
+  src: url("./digital-7/digital-7.ttf");
+}
+
 body {
   background-image: url("./imgs/spaceBackground.jpg");
   background-repeat: no-repeat;
@@ -11,7 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 70px;
+  margin-top: 19vh;
 }
 
 #calculatorbody {
@@ -42,6 +47,7 @@ body {
 #calculatorScreenText {
   color: aqua;
   padding-right: 15px;
+  font-family: "digital-7";
 }
 
 .buttoncontainer {
@@ -69,4 +75,34 @@ body {
   width: auto;
   height: auto;
   flex-grow: 1;
+}
+
+.plusAndDelete {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#bottomText {
+  color: white;
+}
+
+#backspace {
+  background-color: rgb(255, 93, 52);
+  padding: 10px 6px;
+}
+
+.equalsClear {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 100px;
+}
+
+#bottomText {
+  text-align: center;
+  margin-top: 30px;
+  font-size: larger;
+  font-weight: bold;
+  font-family: "digital-7";
 }
