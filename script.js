@@ -51,7 +51,6 @@ function clear() {
 }
 
 function screenClear(e) {
-  console.log(e);
   if (e.target.className === "numberButton") {
     // If a new number button is pressed, clear screen and show new number
     screenDisplay.textContent = "";
@@ -82,6 +81,8 @@ function keyLimits(e) {
     document.getElementById("backspace").click();
   } else if (e.key == "=") {
     document.getElementById("equals").click();
+  } else if (e.key == ".") {
+    document.getElementById(".").click();
   } else {
     return;
   }
@@ -138,3 +139,20 @@ equalsButton.addEventListener("click", () => {
 });
 
 window.addEventListener("keydown", (e) => keyLimits(e));
+
+// This block uses MutationObserver to check if more than one . is in the screen
+var pointButton = document.getElementById(".");
+var observer = new MutationObserver(function (mutations) {
+  pointButton.addEventListener("click", numberInput);
+  for (let character of screenDisplay.textContent) {
+    if (character == ".") {
+      pointButton.removeEventListener("click", numberInput);
+    }
+  }
+});
+
+observer.observe(screenDisplay, {
+  attributes: true,
+  childList: true,
+  characterData: true,
+});
